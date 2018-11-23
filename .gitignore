@@ -3,5 +3,6 @@ config
 description
 hooks/
 info/
-
+branches/
+refs/
 
