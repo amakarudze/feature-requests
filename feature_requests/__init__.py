@@ -6,10 +6,11 @@ from flask import Flask
 def create_app(test_config=None):
     # create and configure our app
     app = Flask(__name__, instance_relative_config=True)
+    db_path = os.path.join(app.instance_path, 'features.db'),
+    db_uri = 'sqlite:///{}'.format(db_path)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        # DATABASE=os.path.join(app.instance_path, 'features.sqlite'),
-        SQLALCHEMY_DATABASE_URI='sqlite:///features.db',
+        SQLALCHEMY_DATABASE_URI=db_uri,
     )
 
     if test_config is None:
