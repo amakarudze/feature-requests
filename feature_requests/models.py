@@ -1,8 +1,11 @@
 from datetime import datetime
+
 from flask import Flask
+
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
 db = SQLAlchemy(app)
 
 
@@ -23,6 +26,9 @@ class FeatureRequest(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
     priority_id = db.Column(db.Integer, db.ForeignKey('priority.id'))
     target_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    closed = db.Column(db.Boolean, default=False)
+    client = db.relationship('Client', backref=db.backref('clients', lazy=True))
+    priority = db.relationship('Priority', backref=db.backref('priority', lazy=True))
 
     def __repr__(self):
         return '<Feature Request %r>' % self.title
@@ -31,7 +37,6 @@ class FeatureRequest(db.Model):
 class Client(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
-    client = db.relationship('Client', backref=db.backref('clients', lazy=True))
 
     def __repr__(self):
         return '<Client %r>' % self.name
@@ -40,7 +45,6 @@ class Client(db.Model):
 class Priority(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     level = db.Column(db.String(30), unique=True, nullable=False)
-    priority = db.relationship('Priority', backref=db.backref('priority', lazy=True))
 
     def __repr__(self):
         return '<Priority %r>' % self.level

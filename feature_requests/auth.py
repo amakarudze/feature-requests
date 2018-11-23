@@ -16,21 +16,22 @@ def register():
         password = request.form['password']
         error = None
 
-    if not username:
-        error = 'Username is required.'
-    elif not email:
-        error = 'Email is required.'
-    elif not password:
-        error = 'Password is required.'
-    elif User.query.filter_by(username=username).first() is not None:
-        error = 'Username {} already registered.'
+        if not username:
+            error = 'Username is required.'
+        elif not email:
+            error = 'Email is required.'
+        elif not password:
+            error = 'Password is required.'
+        elif User.query.filter_by(username=username).first() is not None:
+            error = 'Username {} already registered.'.format(username)
 
-    if error is None:
-        user = User(username=username, email=email, password=generate_password_hash(password))
-        db.session.add(user)
-        return redirect(url_for('auth.login'))
+        if error is None:
+            user = User(username=username, email=email, password=generate_password_hash(password))
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('auth.login'))
 
-    flash(error)
+        flash(error)
 
     return render_template('auth/register.html')
 

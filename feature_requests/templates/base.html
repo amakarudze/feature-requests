@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} - IWS Feature Requests</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 </head>
 <body>
     <nav>
@@ -11,6 +11,8 @@
         <ul>
             {% if g.user %}
                 <li><span>{{ g.user['username'] }}</span>
+                <li><a href="{{ url_for('index') }}">Add Feature Request</a>
+                <li><a href="{{ url_for('feature_requests') }}">Feature Requests</a>
                 <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
             {% else %}
                 <li><a href="{{ url_for('auth.register') }}">Register</a>
