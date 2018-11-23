@@ -2,6 +2,9 @@ import os
 
 from flask import Flask
 
+from . import auth
+from . import features
+
 
 def create_app(test_config=None):
     # create and configure our app
@@ -25,5 +28,8 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(features.bp)
 
     return app
