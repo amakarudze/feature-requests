@@ -6,16 +6,42 @@
 
 {% block content %}
     <form method="post">
-        <label for="title">Title</label>
-        <input name="title" id="title" required>
-        <label for="description">Description</label>
-        <input name="description" id="description" required>
-        <label for="client_id">Client</label>
-        <input name="client_id" id="client_id" required>
-        <label for="priority_id">Priority</label>
-        <input name="priority_id" id="priority_id" required>
-        <label for="target_date">Target date</label>
-        <input name="target_date" id="target_date" required>
-        <input type="submit" value="Add">
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input name="title" class="form-control" id="title" placeholder="Enter title" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea name="description" class="form-control" id="description" placeholder="Enter description"
+                          rows="5" required>
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="client_id" class="col-sm-2 col-form-label">Client</label>
+            <div class="col-sm-10">
+                <select name="client_id" class="form-control" id="client_id" placeholder="Select client" required>
+                    <option>Sample Client</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="priority_id" class="col-sm-2 col-form-label">Priority</label>
+            <div class="col-sm-10">
+                <select name="priority_id" class="form-control" id="priority_id"  placeholder="Select Priority"required>
+                    <option>Sample Priority</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="target_date" class="col-sm-2 col-form-label">Target date</label>
+            <div class="col-sm-10">
+                <input name="target_date" class="form-control" id="target_date" placeholder="Enter target date" required>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary mb-2" value="Add">
     </form>
 {% endblock %}

@@ -49,6 +49,6 @@ def index():
     return render_template('index.html')
 
 
-@bp.route('/feature_requests', methods=['GET'])
-def feature_requests():
-    return render_template('feature_requests.html')
+@bp.route('/open_requests', methods=['GET'])
+def open_requests():
+    return render_template('open_requests.html')
