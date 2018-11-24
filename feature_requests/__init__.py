@@ -2,6 +2,8 @@ import os
 
 from flask import Flask
 
+from flask_sqlalchemy import SQLAlchemy
+
 from . import auth
 from . import views
 
@@ -14,7 +16,11 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         SQLALCHEMY_DATABASE_URI=db_uri,
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
+
+    db = SQLAlchemy()
+    db.init_app(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
