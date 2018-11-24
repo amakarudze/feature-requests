@@ -6,6 +6,8 @@
     <!-- Static files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/fontawesome.min.css') }}">
 </head>
 <body>
     <div>
@@ -23,7 +25,9 @@
                         <span class="sr-only">(current)</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('open_requests') }}">Feature Requests</a>
                     <li class="nav-item"><span class="navbar-text">{{ g.user['username'] }}</span>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out
+                    <i class="fa fa-power"></i>
+                </a>
                 {% else %}
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
@@ -42,7 +46,9 @@
                 <div class="flash">{{ message }}</div>
             {% endfor %}
 
-            {% block content %}{% endblock %}
+            {% block content %}
+
+            {% endblock %}
         </section>
 
         <!--Footer-->
@@ -54,5 +60,17 @@
 
     </div>
 
+    <script type=text/javascript src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='font-awesome/fontawesome.min.js') }}"></script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+
+     <script>
+         $(function () {
+              $('#target_date').datetimepicker();
+         });
+     </script>
 </body>
 </html>

@@ -3,13 +3,13 @@ import os
 from flask import Flask
 
 from . import auth
-from . import features
+from . import views
 
 
 def create_app(test_config=None):
-    # create and configure our app
+    # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    db_path = os.path.join(app.instance_path, 'feature_request.db'),
+    db_path = os.path.join(app.instance_path, 'feature_request.db')
     db_uri = 'sqlite:///{}'.format(db_path)
     app.config.from_mapping(
         SECRET_KEY='dev',
@@ -30,7 +30,7 @@ def create_app(test_config=None):
         pass
 
     app.register_blueprint(auth.bp)
-    app.register_blueprint(features.bp)
+    app.register_blueprint(views.bp)
     app.add_url_rule('/', endpoint='index')
 
     return app

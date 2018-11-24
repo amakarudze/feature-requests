@@ -26,6 +26,7 @@ class FeatureRequest(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'), nullable=False)
     priority_id = db.Column(db.Integer, db.ForeignKey('priority.id'))
     target_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
     closed = db.Column(db.Boolean, default=False)
     client = db.relationship('Client', backref=db.backref('clients', lazy=True))
     priority = db.relationship('Priority', backref=db.backref('priority', lazy=True))

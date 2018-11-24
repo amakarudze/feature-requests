@@ -2,18 +2,21 @@ from datetime import datetime
 
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
 
-from werkzeug.exceptions import abort
-
-from .auth import login_required
-
 from .models import db, FeatureRequest
+from .auth import login_required
 
 
 bp = Blueprint('features', __name__)
 
 
-@bp.route('/',  methods=('GET', 'POST'))
+@bp.route('/', methods=['GET'])
+@login_required
 def index():
+    return render_template('index.html')
+
+
+@bp.route('/create',  methods=('GET', 'POST'))
+def create():
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
@@ -42,13 +45,10 @@ def index():
                                   target_date=target_date)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('index'))
 
         flash(error)
 
-    return render_template('index.html')
+    return render_template('create.html')
 
 
-@bp.route('/open_requests', methods=['GET'])
-def open_requests():
-    return render_template('open_requests.html')
