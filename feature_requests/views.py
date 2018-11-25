@@ -24,6 +24,7 @@ def create():
         customer_id = request.form['customer_id']
         priority_id = request.form['priority_id']
         target_date = request.form['target_date']
+
         error = None
 
         if not title:
@@ -38,8 +39,10 @@ def create():
             error = 'Target date is required.'
         # elif target_date > datetime.utcnow() or target_date == datetime.utcnow():
             # error = 'Target date should be in the future.'
-        elif FeatureRequest.query.filter_by(and_(customer_id=customer_id, priority_id=priority_id)).all() is not None:
-            error = '{} already has feature request with same priority. Please assign another priority.'
+        elif FeatureRequest.query.filter(and_(FeatureRequest.customer_id == customer_id,
+                                              FeatureRequest.priority_id == priority_id,
+                                              FeatureRequest.closed == False)).all():
+            error = 'Customer already has feature request with same priority. Please assign another priority.'
 
         flash(error)
 
@@ -50,9 +53,8 @@ def create():
             db.session.commit()
             flash('Feature request added successfully.')
 
-    else:
-        clients = Customer.query.all()
-        priority_list = Priority.query.all()
+    clients = Customer.query.all()
+    priority_list = Priority.query.all()
 
     return render_template('create.html', clients=clients, priority_list=priority_list)
 

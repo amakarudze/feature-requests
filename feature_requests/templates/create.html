@@ -23,9 +23,9 @@
         <div class="form-group row">
             <label for="customer_id" class="col-sm-2 col-form-label">Customer</label>
             <div class="col-sm-10">
-                <select name="customer_id" class="form-control" id="customer_id" placeholder="Select client" required>
+                <select name="customer_id" class="form-control" id="customer_id" placeholder="Select customer" required>
                     {% for client in clients %}
-                        <option>{{ client['name'] }}</option>
+                        <option value="{{ client.id }}">{{ client['name'] }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -35,7 +35,7 @@
             <div class="col-sm-10">
                 <select name="priority_id" class="form-control" id="priority_id"  placeholder="Select Priority"required>
                     {% for priority_level in priority_list %}
-                        <option>{{ priority_level['priority_level'] }}</option>
+                        <option value="{{ priority_level.id }}">{{ priority_level['priority_level'] }}</option>
                     {% endfor %}
                 </select>
             </div>
