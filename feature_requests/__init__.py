@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask
-
 from flask_sqlalchemy import SQLAlchemy
 
 from . import auth
@@ -16,7 +15,6 @@ def create_app(test_config=None):
         SQLALCHEMY_DATABASE_URI='mysql+pymysql://admin:pass1234@localhost/features',
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
-
     db = SQLAlchemy()
     db.init_app(app)
 

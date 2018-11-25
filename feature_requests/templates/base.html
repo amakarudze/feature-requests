@@ -13,7 +13,7 @@
     <div>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="#">IWS Feature Requests</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">IWS Feature Requests</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,14 +23,16 @@
                 {% if g.user %}
                     <li class="nav-item active"><a class="nav-link" href="{{ url_for('index') }}">Home
                         <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('open_requests') }}">Feature Requests</a>
-                    <li class="nav-item"><span class="navbar-text">{{ g.user['username'] }}</span>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('create') }}">New Feature Request</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">New Client</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">New Priority</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out
-                    <i class="fa fa-power"></i>
-                </a>
+                        <i class="fa fa-power"></i></a></li>
+                    <li class="nav-item"><span class="navbar-text">{{ g.user['username'] }}</span></li>
+
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a></li>
                 {% endif %}
                 </ul>
             </div>

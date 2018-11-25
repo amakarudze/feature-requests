@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Add Priority{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <div class="form-group row">
+            <label for="priority_level" class="col-sm-2 col-form-label">Priority Level</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="priority_level" id="priority_level" placeholder="Enter priority level" required>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Add">
+    </form>
+{% endblock %}

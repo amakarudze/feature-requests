@@ -3,17 +3,17 @@
 {% block header %}
   <h1>{% block title %}Feature Requests{% endblock %}</h1>
   {% if g.user %}
-    <a class="action" href="{{ url_for('features.create') }}">New</a>
+    <a class="action" href="{{ url_for('features.create') }}">New Feature Request</a>
   {% endif %}
 {% endblock %}
 
 {% block content %}
   <div class="row">
-      <div class="col-sm-4">Title</div>
-      <div class="col-sm-2">Client</div>
-      <div class="col-sm-1">Priority</div>
-      <div class="col-sm-2">Target Date</div>
-      <div class="col-sm-2">Date Created</div>
+      <div class="col-sm-4"><b>Title</b></div>
+      <div class="col-sm-2"><b>Client</b></div>
+      <div class="col-sm-1"><b>Priority</b></div>
+      <div class="col-sm-2"><b>Target Date</b></div>
+      <div class="col-sm-2"><b>Date Created</b></div>
       <div class="col-sm-1"></div>
 
   </div>
