@@ -11,11 +11,9 @@ from . import views
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    db_path = os.path.join(app.instance_path, 'feature_request.db')
-    db_uri = 'sqlite:///{}'.format(db_path)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        SQLALCHEMY_DATABASE_URI=db_uri,
+        SQLALCHEMY_DATABASE_URI='mysql+pymysql://admin:pass1234@localhost/features',
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
