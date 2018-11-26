@@ -11,13 +11,14 @@ bp = Blueprint('features', __name__)
 
 
 @bp.route('/', methods=['GET'])
-# @login_required
+@login_required
 def index():
     feature_requests = FeatureRequest.query.filter(FeatureRequest.closed == False).all()
     return render_template('index.html', feature_requests=feature_requests)
 
 
 @bp.route('/create',  methods=('GET', 'POST'))
+@login_required
 def create():
     db.create_all()
     if request.method == 'POST':
@@ -70,6 +71,7 @@ def create():
 
 
 @bp.route('/add_client', methods=['GET', 'POST'])
+@login_required
 def add_client():
     if request.method == 'POST':
         name = request.form['name']
@@ -89,6 +91,7 @@ def add_client():
 
 
 @bp.route('/add_priority', methods=['GET', 'POST'])
+@login_required
 def add_priority():
     if request.method == 'POST':
         priority_level = request.form['priority_level']
@@ -108,6 +111,7 @@ def add_priority():
 
 
 @bp.route('/add_product_area', methods=['GET', 'POST'])
+@login_required
 def add_product_area():
     if request.method == 'POST':
         name = request.form['name']
