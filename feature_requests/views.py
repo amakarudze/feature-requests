@@ -34,8 +34,10 @@ def create():
             error = 'Description is required.'
         elif not customer_id:
             error = 'Client ID is required.'
-        if not priority_id:
+        elif not priority_id:
             error = 'Priority is required.'
+        elif not product_area:
+            error = 'Product area is required.'
         elif not target_date:
             error = 'Target date is required.'
         # elif target_date > datetime.utcnow() or target_date == datetime.utcnow():
