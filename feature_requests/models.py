@@ -23,10 +23,12 @@ class FeatureRequest(db.Model):
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
     priority_id = db.Column(db.Integer, db.ForeignKey('priority.id'))
     target_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    product_area_id = db.Column(db.Integer, db.ForeignKey('product_area.id'))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     closed = db.Column(db.Boolean, default=False)
     customer = db.relationship('Customer', backref=db.backref('customer', lazy=True))
     priority = db.relationship('Priority', backref=db.backref('priority', lazy=True))
+    product_area = db.relationship('ProductArea', backref=db.backref('product_area', lazy=True))
 
     def __repr__(self):
         return '<Feature Request %r>' % self.title

@@ -18,6 +18,7 @@ def index():
 
 @bp.route('/create',  methods=('GET', 'POST'))
 def create():
+    db.create_all()
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
@@ -25,6 +26,9 @@ def create():
         priority_id = request.form['priority_id']
         product_area = request.form['product_area']
         target_date = request.form['target_date']
+
+        # convert target date to datetime object.
+        targetdate = datetime.strptime(target_date, '%m/%d/%Y %H:%M %p')
 
         error = None
 
@@ -40,8 +44,8 @@ def create():
             error = 'Product area is required.'
         elif not target_date:
             error = 'Target date is required.'
-        # elif target_date > datetime.utcnow() or target_date == datetime.utcnow():
-            # error = 'Target date should be in the future.'
+        elif targetdate < datetime.utcnow() or targetdate == datetime.utcnow():
+            error = 'Target date should be in the future.'
         elif FeatureRequest.query.filter(and_(FeatureRequest.customer_id == customer_id,
                                               FeatureRequest.priority_id == priority_id,
                                               FeatureRequest.closed == False)).all():
@@ -52,7 +56,7 @@ def create():
         if error is None:
             feature_request = FeatureRequest(title=title, description=description, customer_id=customer_id,
                                              priority_id=priority_id, product_area=product_area,
-                                             target_date=target_date)
+                                             target_date=targetdate)
             db.session.add(feature_request)
             db.session.commit()
             flash('Feature request added successfully.')
