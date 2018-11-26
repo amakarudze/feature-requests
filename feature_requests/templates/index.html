@@ -1,21 +1,38 @@
 {% extends 'base.html' %}
 
 {% block header %}
+
   <h1>{% block title %}Feature Requests{% endblock %}</h1>
-  {% if g.user %}
-    <a class="action" href="{{ url_for('features.create') }}">New Feature Request</a>
-  {% endif %}
+
 {% endblock %}
 
 {% block content %}
-  <div class="row">
-      <div class="col-sm-4"><b>Title</b></div>
-      <div class="col-sm-2"><b>Client</b></div>
-      <div class="col-sm-1"><b>Priority</b></div>
-      <div class="col-sm-2"><b>Target Date</b></div>
-      <div class="col-sm-2"><b>Date Created</b></div>
-      <div class="col-sm-1"></div>
+    {% if feature_requests %}
+        <div class="row">
+            <div class="col-sm-4"><b>Title</b></div>
+            <div class="col-sm-2"><b>Client</b></div>
+            <div class="col-sm-1"><b>Priority</b></div>
+            <div class="col-sm-2"><b>Target Date</b></div>
+            <div class="col-sm-2"><b>Date Created</b></div>
+            <div class="col-sm-1"></div>
+        </div>
 
-  </div>
+        {% for feature_request in feature_requests %}
+            <div class="row">
+                <div class="col-sm-4">{{ feature_request['title'] }}</div>
+                <div class="col-sm-2">{{ feature_request['customer_id'] }}</div>
+                <div class="col-sm-1">{{ feature_request['priority_id'] }}</div>
+                <div class="col-sm-2">{{ feature_request['target_date'] }}</div>
+                <div class="col-sm-2">{{ feature_request['date_created'] }}</div>
+                <div class="col-sm-1"><a class="btn btn-primary mb-2">Edit</a></div>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No open feature requests to work on at this time.</p>
+
+    {% endif %}
 
 {% endblock %}

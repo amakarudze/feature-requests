@@ -13,7 +13,8 @@ bp = Blueprint('features', __name__)
 @bp.route('/', methods=['GET'])
 # @login_required
 def index():
-    return render_template('index.html')
+    feature_requests = FeatureRequest.query.filter(FeatureRequest.closed == False).all()
+    return render_template('index.html', feature_requests=feature_requests)
 
 
 @bp.route('/create',  methods=('GET', 'POST'))
@@ -55,7 +56,7 @@ def create():
 
         if error is None:
             feature_request = FeatureRequest(title=title, description=description, customer_id=customer_id,
-                                             priority_id=priority_id, product_area=product_area,
+                                             priority_id=priority_id, product_area_id=product_area,
                                              target_date=targetdate)
             db.session.add(feature_request)
             db.session.commit()

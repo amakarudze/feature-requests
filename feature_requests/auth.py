@@ -42,19 +42,15 @@ def login():
         username = request.form['username']
         password = request.form['password']
         error = None
-        user = User.query.filter_by(username=username)
+        user = User.query.filter_by(username=username).first()
 
-        if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect username/password.'
-
-        if error is None:
+        if user and check_password_hash(user.password, password):
             session.clear()
-            session['user_id'] = user['id']
+            session['user_id'] = user.id
             return redirect(url_for('index'))
-
-        flash(error)
+        else:
+            error = 'Incorrect username/password.'
+            flash(error)
 
     return render_template('auth/login.html')
 
@@ -66,7 +62,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = User.query.filter_by(user_id=user_id)
+        g.user = User.query.filter_by(id=user_id)
 
 
 @bp.route('/logout')
