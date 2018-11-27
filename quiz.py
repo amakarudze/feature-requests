@@ -14,5 +14,5 @@ def main():
     print(f.decrypt(message))
 
 
-if '__name__' != "__main__":
+if __name__ == "__main__":
     main()
